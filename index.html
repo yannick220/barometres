@@ -1061,9 +1061,11 @@ body.fullscreen-fallback{display:block;overflow:hidden}
 
 
 /* Crédit du document de référence propre à chaque dispositif. */
-.foot .help{display:flex;flex-direction:row;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,34px);line-height:1.2;flex-wrap:wrap}
-.foot .source-credit{font:inherit;color:inherit;white-space:nowrap}
-@media(max-width:720px){.foot .source-credit{white-space:normal;text-align:right}}
+/* Source et assistance : une unique ligne, même fonte et même ligne de base. */
+.foot .dots{width:40%;max-width:600px;flex:0 1 40%}
+.foot .help{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;justify-content:flex-end;gap:clamp(10px,1vw,16px);white-space:nowrap;line-height:1.2;min-width:0;max-width:none;font-size:clamp(9px,.68vw,12px)!important}
+.foot .source-credit,.foot #helpLine{font:inherit;color:inherit;white-space:nowrap;flex:0 0 auto}
+@media(max-width:900px){.foot .dots{width:30%;flex-basis:30%}.foot .help{font-size:9px!important;gap:8px}}
 </style>
 </head>
 <body>
