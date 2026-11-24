@@ -1059,6 +1059,11 @@ body.fullscreen-fallback{display:block;overflow:hidden}
   line-height:normal!important;
 }
 
+
+/* Crédit du document de référence propre à chaque dispositif. */
+.foot .help{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;line-height:1.2}
+.foot .source-credit{font-size:clamp(9px,.73vw,12px);font-weight:600;color:#c0d0df;white-space:nowrap}
+@media(max-width:720px){.foot .source-credit{white-space:normal;text-align:right}}
 </style>
 </head>
 <body>
@@ -1081,7 +1086,7 @@ body.fullscreen-fallback{display:block;overflow:hidden}
   <section class="meter" aria-label="Baromètre horizontal"><div class="meter-top"><b id="meterHeading">LE VIOLENTOMÈTRE <span style="color:#88a0b3">· 24 REPÈRES</span></b><span id="meterStatus"></span></div><div class="scale blind" id="scale"></div><div class="scale-labels" id="scaleLabels"><span>RELATION SAINE · PROFITE</span><span>VIGILANCE · DIS STOP !</span><span>DANGER · DEMANDE DE L’AIDE</span></div></section>
   <div class="feedback idle" id="feedback" aria-live="polite"><div class="text"><div class="situation-title" id="situationTitle"></div><div class="feedback-title" id="feedbackTitle"></div><div class="official" id="official"></div></div><div class="comparison" id="comparison" hidden></div></div>
  </main>
- <footer class="foot"><div class="dots" id="dots" aria-label="Progression des 24 situations"></div><div class="help">Besoin d’aide : <strong>3919</strong> · Urgence : <strong>17 / 112</strong></div></footer>
+ <footer class="foot"><div class="dots" id="dots" aria-label="Progression des 24 situations"></div><div class="help"><div class="source-credit" id="sourceCredit"></div><div id="helpLine">Besoin d’aide : <strong>3919</strong> · Urgence : <strong>17 / 112</strong></div></div></footer>
  <div class="restart-overlay" id="restartOverlay" hidden><div class="restart-panel" role="dialog" aria-modal="true" aria-labelledby="restartHeading"><h2 id="restartHeading">Veux-tu recommencer ?</h2><p>Les cartes déjà explorées ne seront plus conservées.</p><div class="restart-actions"><button id="restartCancel" type="button">ANNULER</button><button id="restartConfirm" type="button">RECOMMENCER</button></div></div></div>
 </div>
 <script>
@@ -1115,7 +1120,8 @@ function selectBarometer(key){
  $('scaleLabels').style.gridTemplateColumns=greenEnd+'fr '+(yellowEnd-greenEnd)+'fr '+(total()-yellowEnd)+'fr';
  [...$('scaleLabels').children].forEach((el,i)=>el.textContent=d.legend[i]);
  zones.forEach((z,i)=>z.querySelector('b').textContent=d.zones[i]);
- document.querySelector('.help').innerHTML=d.help;
+ $('sourceCredit').textContent='Source : '+({violent:'Centre Hubertine Auclert · Violentomètre 2025',egal:'Maison de l’Égalité Femmes-Hommes de Rochefort',harc:'France Victimes 41 · Harcèlomètre'}[key]);
+ $('helpLine').innerHTML=d.help;
  $('dots').style.gridTemplateColumns=`repeat(${total()},1fr)`;
  $('scale').style.gridTemplateColumns=`repeat(${total()},minmax(0,1fr))`;
  buildScale(); restart();
